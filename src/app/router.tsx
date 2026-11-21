@@ -1,11 +1,12 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, type RouteObject } from "react-router-dom";
 import { LatestRates } from "@/features/rates/LatestRates";
 import { AppLayout } from "./layout";
 import { DashboardPage } from "@/features/dashboard/DashboardPage";
 import { NotFound } from "./not-found";
 import { RouteError } from "./route-error";
 
-export const router = createBrowserRouter([
+// Exported on their own so tests can mount the same routes in a memory router.
+export const routes: RouteObject[] = [
   {
     path: "/", // the parent URL: the root of the site
     element: <AppLayout />, // the component with the <Outlet />
@@ -16,4 +17,6 @@ export const router = createBrowserRouter([
       { path: "*", element: <NotFound /> }, // matches anything else
     ],
   },
-]);
+];
+
+export const router = createBrowserRouter(routes);
