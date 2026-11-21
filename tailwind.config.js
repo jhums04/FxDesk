@@ -1,10 +1,13 @@
+// The CSS variables in src/index.css hold complete colours, e.g. --primary: oklch(0.205 0 0).
+// color-mix lets Tailwind's opacity modifiers (bg-primary/80, outline-ring/50) work with them:
+// <alpha-value> becomes 0.8 for "/80", and 1 when there is no modifier.
+const themeColor = (name) =>
+  `color-mix(in oklch, var(--${name}) calc(<alpha-value> * 100%), transparent)`;
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       borderRadius: {
@@ -13,49 +16,48 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: themeColor("background"),
+        foreground: themeColor("foreground"),
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: themeColor("card"),
+          foreground: themeColor("card-foreground"),
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: themeColor("popover"),
+          foreground: themeColor("popover-foreground"),
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: themeColor("primary"),
+          foreground: themeColor("primary-foreground"),
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: themeColor("secondary"),
+          foreground: themeColor("secondary-foreground"),
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: themeColor("muted"),
+          foreground: themeColor("muted-foreground"),
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: themeColor("accent"),
+          foreground: themeColor("accent-foreground"),
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: themeColor("destructive"),
+          foreground: themeColor("destructive-foreground"),
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
+        border: themeColor("border"),
+        input: themeColor("input"),
+        ring: themeColor("ring"),
         chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+          1: themeColor("chart-1"),
+          2: themeColor("chart-2"),
+          3: themeColor("chart-3"),
+          4: themeColor("chart-4"),
+          5: themeColor("chart-5"),
         },
       },
     },
   },
   plugins: [],
-}
-
+};
